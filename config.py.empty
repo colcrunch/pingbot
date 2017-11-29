@@ -2,6 +2,10 @@ BotToken = ""
 
 prefix = ""
 
+msg = ""
+
+loggingLevel = ""
+
 PingOrigins = []
 
 PingDestis = []
