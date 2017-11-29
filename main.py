@@ -16,7 +16,7 @@ logger.addHandler(handler)
 
 pingbot = Bot(command_prefix=config.prefix)
 
-@killbot.event
+@pingbot.event
 async def on_ready():
     print("Bot Online")
     print("------")
@@ -30,7 +30,10 @@ async def on_ready():
 # Ping
 # Command returns PONG!
 #---------------------------
-@killbot.command()
+@pingbot.command()
 async def ping():
     """ PONG! """
     await pingbot.say("PONG!")
+
+
+pingbot.run(config.BotToken)
