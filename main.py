@@ -35,6 +35,11 @@ async def ping():
     """ PONG! """
     await pingbot.say("PONG!")
 
+
+#---------------------------
+# Connections
+# Displats information about bot connections.
+#---------------------------
 @pingbot.command()
 async def conn():
     """ Displays information about bot connections."""
