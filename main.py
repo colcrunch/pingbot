@@ -23,7 +23,7 @@ async def on_ready():
     print("Logged in as: {}".format(pingbot.user.name))
     print("ID: {}".format(pingbot.user.id))
     print("------")
-    await pingbot.change_presence(game=discord.Game(type=0,name=config.msg+" | "+config.prefix+"help"),afk=false)
+    await pingbot.change_presence(game=discord.Game(type=0,name=config.msg+" | "+config.prefix+"help"),afk=False)
 
 #Bot Commands go here
 #---------------------------
@@ -35,5 +35,27 @@ async def ping():
     """ PONG! """
     await pingbot.say("PONG!")
 
+@pingbot.command()
+async def conn():
+    """ Displays information about bot connections."""
+    servers = []
+    for server in pingbot.servers:
+        servers.append(server.name)
+    await pingbot.say(len(servers))
+
+@pingbot.event
+async def on_message(message):
+    print(message.channel.id)
+    print(message.content)
+    if message.channel.id in config.PingOrigins:
+        if message.author.id != pingbot.user.id:
+            for desti in config.PingDestis:
+                dest = discord.Object(id=desti)
+                await pingbot.send_message(dest, message.content)
+        else:
+            pass
+    else:
+        pass
+    await pingbot.process_commands(message)
 
 pingbot.run(config.BotToken)
